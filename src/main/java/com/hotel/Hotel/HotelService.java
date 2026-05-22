@@ -33,6 +33,6 @@ public class HotelService {
       throw new RoomsNotAvailable();
     }
 
-    repo.findByIdAndUpdateRoomCount(id, roomCount);
+    repo.findByIdAndUpdateRoomCount(id, -roomCount);
   }
 }

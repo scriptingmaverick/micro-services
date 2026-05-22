@@ -92,7 +92,7 @@ class HotelServiceTest {
 
     service.bookRooms("1", 3);
 
-    verify(repo).findByIdAndUpdateRoomCount("1", 3);
+    verify(repo).findByIdAndUpdateRoomCount("1", -3);
   }
 
   @Test

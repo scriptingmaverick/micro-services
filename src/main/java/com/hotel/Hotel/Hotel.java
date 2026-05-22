@@ -4,18 +4,27 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 public class Hotel {
+  private int rooms;
   @Id
   private String id;
-
   private String name;
   private String city;
   @Field(value = "rooms_available")
   private int roomsAvailable;
 
-  public Hotel(String name, String city, int roomsAvailable) {
+  public Hotel(String name, String city, int rooms) {
     this.name = name;
     this.city = city;
-    this.roomsAvailable = roomsAvailable;
+    this.rooms = rooms;
+    this.roomsAvailable = rooms;
+  }
+
+  public int getRooms() {
+    return rooms;
+  }
+
+  public void setRooms(int rooms) {
+    this.rooms = rooms;
   }
 
   public String getId() {

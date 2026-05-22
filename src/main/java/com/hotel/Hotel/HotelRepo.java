@@ -15,6 +15,6 @@ public interface HotelRepo extends MongoRepository<Hotel, String> {
   Optional<Hotel> findById(String id);
 
   @Query("{'_id': ?0}")
-  @Update("{ '$inc' : { 'rooms' : ?1 } }")
+  @Update("{ '$inc' : { 'rooms_available' : ?1 } }")
   void findByIdAndUpdateRoomCount(String id, int roomCount);
 }
