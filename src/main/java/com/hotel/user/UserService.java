@@ -21,4 +21,10 @@ public class UserService {
   Boolean isUserPresent(User user) {
     return repo.findByUsername(user.getUsername()) != null;
   }
+
+  public boolean isValidUser(User user) {
+    User dbUser = this.loadByUsername(user.getUsername());
+
+    return dbUser.getPassword().equals(user.getPassword());
+  }
 }
