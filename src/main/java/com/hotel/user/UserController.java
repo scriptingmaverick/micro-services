@@ -1,5 +1,6 @@
 package com.hotel.user;
 
+import com.hotel.security.JWTService;
 import com.hotel.user.exception.InvalidCredentials;
 import com.hotel.user.exception.UserNotFound;
 import com.hotel.user.record.SignInRecord;
@@ -14,9 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/users")
 public class UserController {
   private final UserService service;
+  private final JWTService jwtService;
 
-  public UserController(UserService service) {
+  public UserController(UserService service, JWTService jwtService) {
     this.service = service;
+    this.jwtService = jwtService;
   }
 
   @PostMapping("/register")
@@ -41,7 +44,7 @@ public class UserController {
         throw new InvalidCredentials();
       }
 
-      String token = "some";
+      String token = jwtService.generateToken(user);
       return ResponseEntity.ok(new SignInRecord(token, "%s login successful".formatted(user.getUsername())));
     } catch (Exception e) {
       return ResponseEntity.badRequest()

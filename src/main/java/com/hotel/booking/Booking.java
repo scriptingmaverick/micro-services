@@ -1,9 +1,13 @@
 package com.hotel.booking;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(value = "bookings")
 public class Booking {
+  @JsonProperty("hotel_id")
+  @Field(value = "hotel_id")
   String hotelId;
   String username;
   int rooms;
