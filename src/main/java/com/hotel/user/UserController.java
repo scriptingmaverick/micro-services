@@ -2,6 +2,8 @@ package com.hotel.user;
 
 import com.hotel.user.exception.InvalidCredentials;
 import com.hotel.user.exception.UserNotFound;
+import com.hotel.user.record.SignInRecord;
+import com.hotel.user.record.SignUpRecord;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

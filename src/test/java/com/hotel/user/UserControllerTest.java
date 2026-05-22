@@ -1,5 +1,7 @@
 package com.hotel.user;
 
+import com.hotel.user.record.SignInRecord;
+import com.hotel.user.record.SignUpRecord;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureRestTestClient;
