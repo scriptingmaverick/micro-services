@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: hotel-app
+  mongodb:
+    database: hotel-app
+    
+server:
+  port: 3000

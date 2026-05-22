@@ -1,6 +1,9 @@
 package com.hotel.user;
 
+import org.springframework.data.mongodb.core.index.Indexed;
+
 public class User {
+  @Indexed(unique = true)
   String username;
   String password;
 
