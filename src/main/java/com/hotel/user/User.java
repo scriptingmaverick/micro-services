@@ -4,8 +4,8 @@ import org.springframework.data.mongodb.core.index.Indexed;
 
 public class User {
   @Indexed(unique = true)
-  String username;
-  String password;
+  private String username;
+  private String password;
 
   public User(String username, String password) {
     this.username = username;
