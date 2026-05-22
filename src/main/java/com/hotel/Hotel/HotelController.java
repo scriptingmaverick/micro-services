@@ -1,6 +1,5 @@
 package com.hotel.Hotel;
 
-import com.hotel.Hotel.exception.NoHotelFound;
 import com.hotel.Hotel.record.AvailabilityRecord;
 import com.hotel.Hotel.record.BookingRecord;
 import com.hotel.Hotel.record.HotelsSearchRecord;
@@ -21,10 +20,12 @@ public class HotelController {
   @GetMapping("/search/hotels")
   ResponseEntity<HotelsSearchRecord> findHotelsInCity(@RequestParam String city) {
     try {
-      List<Hotel> hotelsByCity = service.findHotelsByCity(city);
-      if (hotelsByCity.isEmpty()) throw new NoHotelFound(city);
+      String message = "fetched data";
 
-      return ResponseEntity.ok(new HotelsSearchRecord(hotelsByCity, "fetched data"));
+      List<Hotel> hotelsByCity = service.findHotelsByCity(city);
+      if (hotelsByCity.isEmpty()) message = "No hotels found in %s".formatted(city);
+
+      return ResponseEntity.ok(new HotelsSearchRecord(hotelsByCity, message));
     } catch (Exception e) {
       return ResponseEntity.badRequest().body(new HotelsSearchRecord(List.of(), e.getMessage()));
     }
