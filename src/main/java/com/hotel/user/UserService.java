@@ -14,10 +14,8 @@ public class UserService {
     return repo.findByUsername(username);
   }
 
-  SignUpRecord register(User user) {
-    User savedUser = repo.save(user);
-
-    return new SignUpRecord("%s is created successfully".formatted(savedUser.getUsername()));
+  User register(User user) {
+    return repo.save(user);
   }
 
   Boolean isUserPresent(User user) {

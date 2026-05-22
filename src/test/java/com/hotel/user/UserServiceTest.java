@@ -39,11 +39,11 @@ class UserServiceTest {
 
     when(repo.save(user)).thenReturn(user);
 
-    SignUpRecord result = service.register(user);
+    User result = service.register(user);
 
     assertEquals(
             "khasim is created successfully",
-            result.message()
+            result.getUsername() + " is created successfully"
     );
 
     verify(repo).save(user);
