@@ -26,6 +26,17 @@ class UserControllerTest {
   }
 
   @Test
+  void shouldNotAddUser() {
+    repo.deleteAll();
+    SignUpRecord responseBody = client.post().uri("/api/users/register").body(testUser).header("content-type", "application/json").exchange().expectStatus().isOk().expectBody(SignUpRecord.class).returnResult().getResponseBody();
+
+    assert (responseBody.message().equals(testUser.getUsername() + " is created successfully"));
+    SignUpRecord responseBodyOf2ndRegister = client.post().uri("/api/users/register").body(testUser).header("content-type", "application/json").exchange().expectStatus().is4xxClientError().expectBody(SignUpRecord.class).returnResult().getResponseBody();
+
+    assert (responseBodyOf2ndRegister.message().equals("User already exists"));
+  }
+
+  @Test
   void shouldLogin() {
     repo.deleteAll();
     SignUpRecord responseBody = client.post().uri("/api/users/register").body(testUser).header("content-type", "application/json").exchange().expectStatus().isOk().expectBody(SignUpRecord.class).returnResult().getResponseBody();

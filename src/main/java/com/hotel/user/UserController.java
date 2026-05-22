@@ -1,5 +1,7 @@
 package com.hotel.user;
 
+import com.hotel.user.exception.InvalidCredentials;
+import com.hotel.user.exception.UserNotFound;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,13 +18,13 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public SignUpRecord registerUser(@RequestBody User user) {
+  public ResponseEntity<SignUpRecord> registerUser(@RequestBody User user) {
     try {
       User savedUser = service.register(user);
 
-      return new SignUpRecord("%s is created successfully".formatted(savedUser.getUsername()));
+      return ResponseEntity.ok(new SignUpRecord("%s is created successfully".formatted(savedUser.getUsername())));
     } catch (Exception e) {
-      return new SignUpRecord(e.getMessage());
+      return ResponseEntity.badRequest().body(new SignUpRecord(e.getMessage()));
     }
   }
 
@@ -30,11 +32,11 @@ public class UserController {
   public ResponseEntity<SignInRecord> loginUser(@RequestBody User user) {
     try {
       if (!service.isUserPresent(user)) {
-        throw new Exception("User not found");
+        throw new UserNotFound();
       }
 
       if (!service.isValidUser(user)) {
-        throw new Exception("Invalid credentials");
+        throw new InvalidCredentials();
       }
 
       String token = "some";

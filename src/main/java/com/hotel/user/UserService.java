@@ -1,5 +1,6 @@
 package com.hotel.user;
 
+import com.hotel.user.exception.UserExists;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +16,10 @@ public class UserService {
   }
 
   User register(User user) {
+    if (isUserPresent(user)) {
+      throw new UserExists();
+    }
+
     return repo.save(user);
   }
 
