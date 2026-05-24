@@ -50,7 +50,7 @@ class HotelControllerTest {
   }
 
   @Test
-  void shouldFailWhenNoHotelsFound() {
+  void shouldSaySomeInfoWhenNoHotelsFound() {
 
     repo.deleteAll();
 
@@ -59,14 +59,14 @@ class HotelControllerTest {
                     .uri("/api/search/hotels?city=Hyderabad")
                     .exchange()
                     .expectStatus()
-                    .is4xxClientError()
+                    .isOk()
                     .expectBody(HotelsSearchRecord.class)
                     .returnResult()
                     .getResponseBody();
 
     assertEquals(
-            true,
-            response.hotels().isEmpty()
+            "No hotels found in Hyderabad",
+            response.message()
     );
   }
 
